@@ -1,0 +1,20 @@
+service: graphqlapi
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  versionFunctions: true
+  apiKeys:
+    - postgraphile-dev-apikey
+
+plugins:
+  - serverless-express
+
+functions:
+  graphql_handler:
+    handler: handler.handler
+    events:
+      - http:
+          path: /
+          method: POST
+          cors: true
