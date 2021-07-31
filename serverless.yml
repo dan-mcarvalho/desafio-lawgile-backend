@@ -17,9 +17,7 @@ provider:
 
 plugins:
   - serverless-express
-
-# plugins:
-#   - express
+  - express
 
 functions:
   startPostgraphile:
@@ -28,7 +26,12 @@ functions:
       - http:
           path: /
           method: POST
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - Access-Control-Allow-Origin
+              - Allow-Origin
     vpc:
       securityGroupIds:
         - sg-641afc2f

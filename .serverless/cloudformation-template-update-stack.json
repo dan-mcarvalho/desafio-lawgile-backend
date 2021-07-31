@@ -186,7 +186,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/graphqlapi/dev/1627703346630-2021-07-31T03:49:06.630Z/graphqlapi.zip"
+          "S3Key": "serverless/graphqlapi/dev/1627767769716-2021-07-31T21:42:49.716Z/graphqlapi.zip"
         },
         "Handler": "handler.startPostgraphile",
         "Runtime": "nodejs12.x",
@@ -219,14 +219,14 @@
         "StartPostgraphileLogGroup"
       ]
     },
-    "StartPostgraphileLambdaVersionOdiJdOiLGSmmwJ2lQpo68Ma1MbH2liXlxC3XUItimbs": {
+    "StartPostgraphileLambdaVersionJvfTfLayZzhNJZSkuc4HYufewgNa9Z8bMZQvzOYMZs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "StartPostgraphileLambdaFunction"
         },
-        "CodeSha256": "GD2h/B6z6OUI1LvJXVVlaA2JQrCqZ7EcnZSZOKtgKQw="
+        "CodeSha256": "IDfJw1f9msMa6GAyzzQXd0Os78CoE26C6mNktjZgO2k="
       }
     },
     "ApiGatewayRestApi": {
@@ -269,11 +269,11 @@
               "StatusCode": "200",
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
-                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Access-Control-Allow-Origin,Allow-Origin'",
                 "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
               },
               "ResponseTemplates": {
-                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                "application/json": ""
               }
             }
           ]
@@ -338,7 +338,7 @@
         "StartPostgraphileLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1627703341718": {
+    "ApiGatewayDeployment1627767763660": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -401,7 +401,7 @@
     "StartPostgraphileLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "StartPostgraphileLambdaVersionOdiJdOiLGSmmwJ2lQpo68Ma1MbH2liXlxC3XUItimbs"
+        "Ref": "StartPostgraphileLambdaVersionJvfTfLayZzhNJZSkuc4HYufewgNa9Z8bMZQvzOYMZs"
       },
       "Export": {
         "Name": "sls-graphqlapi-dev-StartPostgraphileLambdaFunctionQualifiedArn"
