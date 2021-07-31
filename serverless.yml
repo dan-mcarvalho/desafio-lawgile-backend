@@ -4,15 +4,16 @@ provider:
   name: aws
   runtime: nodejs12.x
   versionFunctions: true
-  apiKeys:
-    - postgraphile-dev-apikey
+
+# plugins:
+#   - serverless-express
 
 plugins:
-  - serverless-express
+  - express
 
 functions:
   graphql_handler:
-    handler: handler.handler
+    handler: app.execute
     events:
       - http:
           path: /

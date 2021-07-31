@@ -8,14 +8,8 @@
       "name": "aws",
       "runtime": "nodejs12.x",
       "versionFunctions": true,
-      "apiKeys": [
-        "postgraphile-dev-apikey"
-      ],
       "stage": "dev",
       "region": "us-east-1",
-      "environment": {
-        "SERVERLESS_EXPRESS_PLATFORM": "aws"
-      },
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
         "Description": "The AWS CloudFormation template for this Serverless application",
@@ -179,18 +173,13 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/graphqlapi/dev/1627685066509-2021-07-30T22:44:26.509Z/graphqlapi.zip"
+                "S3Key": "serverless/graphqlapi/dev/1627694469287-2021-07-31T01:21:09.287Z/graphqlapi.zip"
               },
-              "Handler": "handler.handler",
+              "Handler": "app.execute",
               "Runtime": "nodejs12.x",
               "FunctionName": "graphqlapi-dev-graphql_handler",
               "MemorySize": 1024,
               "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "SERVERLESS_EXPRESS_PLATFORM": "aws"
-                }
-              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -202,14 +191,14 @@
               "GraphqlUnderscorehandlerLogGroup"
             ]
           },
-          "GraphqlUnderscorehandlerLambdaVersionmBjwsORarEz9U4p1Bnrj0qBs037o8xd5HLXTMU5GMg": {
+          "GraphqlUnderscorehandlerLambdaVersionuwtprtMkkWkgRYhRLoshEA5j6bRE5ezVUmWqq1Nrio": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GraphqlUnderscorehandlerLambdaFunction"
               },
-              "CodeSha256": "y87aN/RDZkPUhCNJMWre44nPh7u4rtAoCzCrtIDMG+k="
+              "CodeSha256": "ryzcXK0yLrk5bxkb1dv8l50FncAxVbyYLUGg1IK4oxY="
             }
           },
           "ApiGatewayRestApi": {
@@ -321,7 +310,7 @@
               "GraphqlUnderscorehandlerLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1627685061895": {
+          "ApiGatewayDeployment1627694461655": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -333,50 +322,6 @@
               "ApiGatewayMethodOptions",
               "ApiGatewayMethodPost"
             ]
-          },
-          "ApiGatewayApiKey1": {
-            "Type": "AWS::ApiGateway::ApiKey",
-            "Properties": {
-              "Enabled": true,
-              "Name": "postgraphile-dev-apikey",
-              "StageKeys": [
-                {
-                  "RestApiId": {
-                    "Ref": "ApiGatewayRestApi"
-                  },
-                  "StageName": "dev"
-                }
-              ]
-            },
-            "DependsOn": "ApiGatewayDeployment1627685061895"
-          },
-          "ApiGatewayUsagePlan": {
-            "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1627685061895",
-            "Properties": {
-              "ApiStages": [
-                {
-                  "ApiId": {
-                    "Ref": "ApiGatewayRestApi"
-                  },
-                  "Stage": "dev"
-                }
-              ],
-              "Description": "Usage plan for graphqlapi dev stage",
-              "UsagePlanName": "graphqlapi-dev"
-            }
-          },
-          "ApiGatewayUsagePlanKey1": {
-            "Type": "AWS::ApiGateway::UsagePlanKey",
-            "Properties": {
-              "KeyId": {
-                "Ref": "ApiGatewayApiKey1"
-              },
-              "KeyType": "API_KEY",
-              "UsagePlanId": {
-                "Ref": "ApiGatewayUsagePlan"
-              }
-            }
           },
           "GraphqlUnderscorehandlerLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
@@ -428,7 +373,7 @@
           "GraphqlUnderscorehandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GraphqlUnderscorehandlerLambdaVersionmBjwsORarEz9U4p1Bnrj0qBs037o8xd5HLXTMU5GMg"
+              "Ref": "GraphqlUnderscorehandlerLambdaVersionuwtprtMkkWkgRYhRLoshEA5j6bRE5ezVUmWqq1Nrio"
             },
             "Export": {
               "Name": "sls-graphqlapi-dev-GraphqlUnderscorehandlerLambdaFunctionQualifiedArn"
@@ -547,12 +492,12 @@
       "vpc": {}
     },
     "plugins": [
-      "serverless-express"
+      "express"
     ],
     "pluginsData": {},
     "functions": {
       "graphql_handler": {
-        "handler": "handler.handler",
+        "handler": "app.execute",
         "events": [
           {
             "http": {
@@ -587,7 +532,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GraphqlUnderscorehandlerLambdaVersionmBjwsORarEz9U4p1Bnrj0qBs037o8xd5HLXTMU5GMg"
+        "versionLogicalId": "GraphqlUnderscorehandlerLambdaVersionuwtprtMkkWkgRYhRLoshEA5j6bRE5ezVUmWqq1Nrio"
       }
     },
     "configValidationMode": "warn",
@@ -611,7 +556,7 @@
     "artifact": "C:\\postgraphile impl\\postgraphile-post-service\\.serverless\\graphqlapi.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/graphqlapi/dev/1627685066509-2021-07-30T22:44:26.509Z",
+    "artifactDirectoryName": "serverless/graphqlapi/dev/1627694469287-2021-07-31T01:21:09.287Z",
     "artifact": "graphqlapi.zip"
   }
 }
