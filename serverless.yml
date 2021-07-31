@@ -3,19 +3,36 @@ service: graphqlapi
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: dev
+  region: us-east-2
   versionFunctions: true
-
-# plugins:
-#   - serverless-express
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action: 
+      - ec2:CreateNetworkInterface
+      - ec2:DescribeNetworkInterfaces
+      - ec2:DeleteNetworkInterface
+      Resource: 
+      - "*"
 
 plugins:
-  - express
+  - serverless-express
+
+# plugins:
+#   - express
 
 functions:
-  graphql_handler:
-    handler: app.execute
+  startPostgraphile:
+    handler: handler.startPostgraphile
     events:
       - http:
           path: /
           method: POST
           cors: true
+    vpc:
+      securityGroupIds:
+        - sg-641afc2f
+      subnetIds:
+        - subnet-b753dbdc
+        - subnet-305b727c
+        - subnet-ca599fb7
